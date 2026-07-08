@@ -1,0 +1,13 @@
+pandas
+numpy
+faker
+python-dotenv
+snowflake-connector-python
+snowflake-sqlalchemy
+sqlalchemy
+dbt-snowflake
+apache-airflow
+streamlit
+plotly
+pyyaml
+pytest

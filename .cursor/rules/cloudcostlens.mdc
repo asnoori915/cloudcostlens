@@ -1,0 +1,47 @@
+You are helping build CloudCostLens, a clean portfolio project for data engineering and analytics engineering.
+
+Project goal:
+Build a cloud cost analytics platform that generates or ingests realistic cloud billing data, loads it into Snowflake, transforms it with dbt, orchestrates the workflow with Airflow, detects cost anomalies, and visualizes spend trends in Streamlit.
+
+Keep the project clean, readable, and resume-friendly.
+
+Core tech stack:
+- Python
+- Snowflake
+- dbt
+- Airflow
+- Streamlit
+- SQL
+- GitHub Actions
+
+Do not overengineer.
+Build in small, testable steps.
+
+Project theme:
+Cloud cost observability / FinOps analytics.
+
+Main datasets:
+- cloud usage/billing records
+- cloud services
+- projects/teams
+- budgets
+- cost anomaly flags
+
+Core features:
+- realistic billing data generator
+- Snowflake raw tables
+- dbt staging and mart models
+- cost anomaly detection
+- budget tracking
+- Streamlit dashboard
+- Airflow DAG
+- GitHub Actions CI
+
+Code style:
+- Keep files small and focused.
+- Use clear function names.
+- Add comments only where helpful.
+- Avoid unnecessary abstractions.
+- Every script should be easy to explain in an interview.
+
+Do not modify unrelated files unless specifically asked.
