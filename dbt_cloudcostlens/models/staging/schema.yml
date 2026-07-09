@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_cloud_usage
+    description: Cleaned cloud billing usage records loaded from DuckDB raw data.
+    columns:
+      - name: billing_date
+        tests:
+          - not_null
+      - name: provider
+        tests:
+          - not_null
+      - name: service
+        tests:
+          - not_null
+      - name: project
+        tests:
+          - not_null
+      - name: environment
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['dev', 'staging', 'prod']
+      - name: resource_id
+        tests:
+          - not_null
+      - name: total_cost
+        tests:
+          - not_null

@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: fact_daily_cloud_cost
+    description: Daily cloud spend grouped by service, project, team, environment, and region.
+    columns:
+      - name: billing_date
+        tests:
+          - not_null
+      - name: service
+        tests:
+          - not_null
+      - name: project
+        tests:
+          - not_null
+      - name: total_cost
+        tests:
+          - not_null
+
+  - name: mart_service_spend
+    description: Total cloud spend by service and provider.
+    columns:
+      - name: service
+        tests:
+          - not_null
+      - name: total_cost
+        tests:
+          - not_null
+
+  - name: mart_budget_tracking
+    description: Project-level budget usage and budget status.
+    columns:
+      - name: project
+        tests:
+          - not_null
+      - name: budget_status
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['OK', 'AT_RISK', 'OVER_BUDGET']
+
+  - name: mart_cost_anomalies
+    description: Daily service/project spend anomalies using rolling 14-day statistics.
+    columns:
+      - name: billing_date
+        tests:
+          - not_null
+      - name: service
+        tests:
+          - not_null
+      - name: project
+        tests:
+          - not_null
+      - name: is_anomaly
+        tests:
+          - not_null
