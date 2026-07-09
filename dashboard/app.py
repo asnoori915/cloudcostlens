@@ -240,9 +240,11 @@ def main() -> None:
                 "project",
                 "daily_cost",
                 "avg_previous_14_days",
-                "stddev_previous_14_days",
+                "anomaly_amount",
+                "anomaly_pct",
+                "anomaly_severity",
             ]
-        ].sort_values(["billing_date", "daily_cost"], ascending=[False, False])
+        ].sort_values("anomaly_amount", ascending=False).head(25)
         anomaly_display = format_date_columns(anomaly_display, ["billing_date"])
         st.dataframe(anomaly_display, width="stretch", hide_index=True)
 

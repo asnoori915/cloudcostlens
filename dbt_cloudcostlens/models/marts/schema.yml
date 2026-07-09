@@ -55,3 +55,6 @@ models:
       - name: is_anomaly
         tests:
           - not_null
+      - name: anomaly_severity
+        tests:
+          - not_null
