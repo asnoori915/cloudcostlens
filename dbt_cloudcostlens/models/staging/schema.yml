@@ -20,7 +20,8 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['dev', 'staging', 'prod']
+              arguments:
+                values: ['dev', 'staging', 'prod']
       - name: resource_id
         tests:
           - not_null

@@ -37,7 +37,8 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['OK', 'AT_RISK', 'OVER_BUDGET']
+              arguments:
+                values: ['OK', 'AT_RISK', 'OVER_BUDGET']
 
   - name: mart_cost_anomalies
     description: Daily service/project spend anomalies using rolling 14-day statistics.
