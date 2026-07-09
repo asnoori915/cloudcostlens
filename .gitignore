@@ -21,3 +21,9 @@ airflow/plugins/__pycache__/
 *.duckdb
 *.duckdb.waldbt_cloudcostlens/.user.yml
 dbt_cloudcostlens/.user.yml
+
+# Local Airflow runtime files
+.venv-airflow/
+airflow_home/
+airflow.db
+standalone_admin_password.txt
