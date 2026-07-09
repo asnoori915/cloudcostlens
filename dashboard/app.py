@@ -138,16 +138,20 @@ def main() -> None:
 
     min_date = filtered_fact["billing_date"].min()
     max_date = filtered_fact["billing_date"].max()
-    date_range = (
-        f"{format_date(min_date)} → {format_date(max_date)}"
-        if pd.notna(min_date) and pd.notna(max_date)
-        else "No data"
-    )
+    if pd.notna(min_date) and pd.notna(max_date):
+        billing_days = (pd.to_datetime(max_date) - pd.to_datetime(min_date)).days + 1
+        billing_window_text = f"{billing_days} days"
+        billing_window_dates = f"{format_date(min_date)} → {format_date(max_date)}"
+    else:
+        billing_window_text = "No data"
+        billing_window_dates = "No data available"
 
     metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
     metric_col1.metric("Total Spend", format_currency(filtered_fact["total_cost"].sum()))
     metric_col2.metric("Total Records", f"{int(filtered_fact['usage_records'].sum()):,}")
-    metric_col3.metric("Date Range", date_range)
+    with metric_col3:
+        st.metric("Billing Window", billing_window_text)
+        st.caption(billing_window_dates)
     metric_col4.metric("Cost Anomalies", f"{len(filtered_anomalies):,}")
 
     st.markdown("---")
