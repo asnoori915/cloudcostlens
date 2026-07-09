@@ -1,0 +1,7 @@
+cloudcostlens:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../data/cloudcostlens.duckdb
+      threads: 4
