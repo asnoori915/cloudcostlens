@@ -20,3 +20,4 @@ airflow/plugins/__pycache__/
 
 *.duckdb
 *.duckdb.waldbt_cloudcostlens/.user.yml
+dbt_cloudcostlens/.user.yml
