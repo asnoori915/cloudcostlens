@@ -19,4 +19,4 @@ airflow/plugins/__pycache__/
 .streamlit/secrets.toml
 
 *.duckdb
-*.duckdb.wal
+*.duckdb.waldbt_cloudcostlens/.user.yml
