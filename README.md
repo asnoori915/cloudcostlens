@@ -27,6 +27,7 @@ The project currently supports:
 - dbt tests
 - Markdown cost summary reporting
 - Streamlit cost dashboard
+- Optional Airflow DAG for workflow orchestration
 
 ## Project Metrics
 
@@ -50,6 +51,10 @@ Top cost drivers include **ML services** (SageMaker, Vertex AI, Azure ML) and **
 - Streamlit
 - Plotly
 - SQL
+
+**Optional orchestration**
+
+- Apache Airflow (separate install via `requirements-airflow.txt`)
 
 **Optional future warehouse path**
 
@@ -94,6 +99,24 @@ streamlit run dashboard/app.py
 - `python -m reporting.generate_cost_report` — writes `reports/cloud_cost_summary.md`
 - `streamlit run dashboard/app.py` — launches the cost observability dashboard
 
+## Optional Airflow Orchestration
+
+CloudCostLens includes an optional Airflow DAG at `airflow/dags/cloudcostlens_daily_pipeline.py`.
+
+The DAG runs the same core local workflow as `python main.py`:
+
+```text
+generate/load billing data → run dbt → generate cost report
+```
+
+Airflow is optional and not required for the default local workflow. The recommended way to run the project locally is still:
+
+```bash
+python main.py
+```
+
+Airflow dependencies are kept separate in `requirements-airflow.txt` so the main project setup stays lightweight.
+
 ## Project Structure
 
 ```text
@@ -102,6 +125,7 @@ analytics/          dbt runner helper
 dbt_cloudcostlens/  dbt staging and mart models
 reporting/          Markdown cost report generation
 dashboard/          Streamlit dashboard
+airflow/            Optional Airflow DAG
 data/               Local CSV and DuckDB warehouse
 reports/            Generated cost summary reports
 snowflake/          Optional Snowflake warehouse setup SQL
@@ -126,8 +150,6 @@ docs/               Architecture notes
 ## Future Enhancements
 
 - Snowflake loading and dbt target switch
-- Airflow orchestration
-- GitHub Actions CI
 
 ## Project Status
 
