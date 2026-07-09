@@ -128,6 +128,8 @@ python main.py
 
 Airflow dependencies are kept separate in `requirements-airflow.txt` so the main project setup stays lightweight.
 
+The DAG was tested locally with `airflow standalone` and successfully ran ingestion, dbt models/tests, and cost report generation.
+
 ## Project Structure
 
 ```text
