@@ -17,3 +17,6 @@ airflow/logs/
 airflow/plugins/__pycache__/
 
 .streamlit/secrets.toml
+
+*.duckdb
+*.duckdb.wal
