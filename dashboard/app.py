@@ -127,10 +127,6 @@ def main() -> None:
         selected_projects,
     )
     filtered_budget = budget_df.copy()
-    if selected_environments:
-        filtered_budget = filtered_budget[
-            filtered_budget["environment"].isin(selected_environments)
-        ]
     if selected_projects:
         filtered_budget = filtered_budget[filtered_budget["project"].isin(selected_projects)]
 
@@ -227,7 +223,6 @@ def main() -> None:
             [
                 "project",
                 "team",
-                "environment",
                 "total_cost",
                 "budget_amount",
                 "budget_used_pct",

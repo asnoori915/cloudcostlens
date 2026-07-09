@@ -2,11 +2,10 @@ with project_spend as (
 
     select
         project,
-        team,
-        environment,
+        min(team) as team,
         round(sum(total_cost), 2) as total_cost
     from {{ ref('stg_cloud_usage') }}
-    group by project, team, environment
+    group by project
 
 ),
 
@@ -29,7 +28,6 @@ budgets as (
 select
     p.project,
     p.team,
-    p.environment,
     p.total_cost,
     b.budget_amount,
     round((p.total_cost / b.budget_amount) * 100, 2) as budget_used_pct,
