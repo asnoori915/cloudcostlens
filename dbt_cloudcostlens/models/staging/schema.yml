@@ -28,3 +28,65 @@ models:
       - name: total_cost
         tests:
           - not_null
+
+  - name: stg_projects
+    description: Project and team spend summary with cost center attribution.
+    columns:
+      - name: project
+        description: Cloud project or application name.
+        tests:
+          - not_null
+      - name: team
+        description: Team responsible for the project spend.
+        tests:
+          - not_null
+      - name: tag_cost_center
+        description: Cost center tag assigned to project resources.
+      - name: first_billing_date
+        description: Earliest billing date for this project/team/cost center group.
+        tests:
+          - not_null
+      - name: last_billing_date
+        description: Latest billing date for this project/team/cost center group.
+        tests:
+          - not_null
+      - name: total_cost
+        description: Total spend for the project/team/cost center group.
+        tests:
+          - not_null
+      - name: resource_count
+        description: Number of distinct resources billed in the group.
+        tests:
+          - not_null
+
+  - name: stg_services
+    description: Provider and service usage summary by usage unit.
+    columns:
+      - name: provider
+        description: Cloud provider for the service usage.
+        tests:
+          - not_null
+      - name: service
+        description: Cloud service name.
+        tests:
+          - not_null
+      - name: usage_unit
+        description: Unit used to measure service usage.
+        tests:
+          - not_null
+      - name: first_billing_date
+        description: Earliest billing date for this provider/service/unit group.
+        tests:
+          - not_null
+      - name: last_billing_date
+        description: Latest billing date for this provider/service/unit group.
+        tests:
+          - not_null
+      - name: total_cost
+        description: Total spend for the provider/service/unit group.
+        tests:
+          - not_null
+      - name: usage_records
+        description: Number of billing records in the group.
+        tests:
+          - not_null
