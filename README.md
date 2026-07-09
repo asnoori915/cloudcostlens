@@ -130,6 +130,20 @@ Airflow dependencies are kept separate in `requirements-airflow.txt` so the main
 
 The DAG was tested locally with `airflow standalone` and successfully ran ingestion, dbt models/tests, and cost report generation.
 
+## Screenshots
+
+### Cloud Cost Dashboard
+
+The Streamlit dashboard summarizes total spend, billing records, billing window, cost anomalies, daily spend trends, top services, project spend, budget status, and raw billing samples.
+
+![CloudCostLens Streamlit Dashboard](docs/images/cloudcostlens-dashboard.png)
+
+### Airflow Orchestration
+
+The optional Airflow DAG successfully orchestrates the local workflow: billing data generation/loading, dbt models/tests, and Markdown report generation.
+
+![CloudCostLens Airflow DAG](docs/images/cloudcostlens-airflow-dag.png)
+
 ## Project Structure
 
 ```text
