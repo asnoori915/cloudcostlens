@@ -1,5 +1,7 @@
 # CloudCostLens
 
+[![CI](https://github.com/asnoori915/cloudcostlens/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/asnoori915/cloudcostlens/actions/workflows/ci.yml)
+
 CloudCostLens is a data engineering and analytics engineering portfolio project for cloud cost observability.
 
 It generates realistic multi-cloud billing data, validates and loads it into a local analytics warehouse, transforms usage records with dbt, produces a Markdown cost report, and visualizes spend trends, budget status, and cost anomalies in a Streamlit dashboard.
