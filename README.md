@@ -12,8 +12,19 @@ Cloud costs are a major operational concern for modern data and software teams. 
 
 ## Architecture Flow
 
-```text
-Billing Generator → CSV Validation → DuckDB → dbt Models → Cost Report → Streamlit Dashboard
+```mermaid
+flowchart LR
+    A[Billing Data Generator] --> B[CSV Validation]
+    B --> C[DuckDB Raw Warehouse]
+    C --> D[dbt Staging Models]
+    D --> E[dbt Cost Marts]
+    E --> F[Anomaly Detection]
+    E --> G[Budget Tracking]
+    F --> H[Markdown Cost Report]
+    G --> H
+    E --> I[Streamlit Dashboard]
+    H --> J[GitHub Actions CI]
+    K[Optional Airflow DAG] --> A
 ```
 
 ## Current Capabilities
