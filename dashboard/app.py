@@ -55,6 +55,22 @@ def format_currency(value: float) -> str:
     return f"${value:,.2f}"
 
 
+def format_date(value) -> str:
+    """Format a date value as YYYY-MM-DD."""
+    if pd.isna(value):
+        return ""
+    return pd.to_datetime(value).strftime("%Y-%m-%d")
+
+
+def format_date_columns(df: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
+    """Return a copy of a dataframe with selected date columns formatted."""
+    display_df = df.copy()
+    for column in columns:
+        if column in display_df.columns:
+            display_df[column] = pd.to_datetime(display_df[column]).dt.strftime("%Y-%m-%d")
+    return display_df
+
+
 def main() -> None:
     st.set_page_config(
         page_title="CloudCostLens",
@@ -127,7 +143,7 @@ def main() -> None:
     min_date = filtered_fact["billing_date"].min()
     max_date = filtered_fact["billing_date"].max()
     date_range = (
-        f"{min_date} to {max_date}"
+        f"{format_date(min_date)} → {format_date(max_date)}"
         if pd.notna(min_date) and pd.notna(max_date)
         else "No data"
     )
@@ -171,7 +187,7 @@ def main() -> None:
                 template="plotly_white",
             )
             fig.update_layout(margin=dict(l=20, r=20, t=20, b=20))
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
     with chart_col2:
         st.subheader("Top Services by Total Cost")
@@ -187,7 +203,7 @@ def main() -> None:
                 template="plotly_white",
             )
             fig.update_layout(yaxis={"categoryorder": "total ascending"}, margin=dict(l=20, r=20, t=20, b=20))
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
     st.subheader("Spend by Project")
     if project_spend.empty:
@@ -201,7 +217,7 @@ def main() -> None:
             template="plotly_white",
         )
         fig.update_layout(margin=dict(l=20, r=20, t=20, b=20))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     table_col1, table_col2 = st.columns(2)
 
@@ -218,7 +234,7 @@ def main() -> None:
                 "budget_status",
             ]
         ].sort_values("budget_used_pct", ascending=False)
-        st.dataframe(budget_display, use_container_width=True, hide_index=True)
+        st.dataframe(budget_display, width="stretch", hide_index=True)
 
     with table_col2:
         st.subheader("Cost Anomalies")
@@ -232,11 +248,13 @@ def main() -> None:
                 "stddev_previous_14_days",
             ]
         ].sort_values(["billing_date", "daily_cost"], ascending=[False, False])
-        st.dataframe(anomaly_display, use_container_width=True, hide_index=True)
+        anomaly_display = format_date_columns(anomaly_display, ["billing_date"])
+        st.dataframe(anomaly_display, width="stretch", hide_index=True)
 
     st.subheader("Raw Billing Sample")
     raw_sample = filtered_raw.sort_values("billing_date", ascending=False).head(100)
-    st.dataframe(raw_sample, use_container_width=True, hide_index=True)
+    raw_sample = format_date_columns(raw_sample, ["billing_date"])
+    st.dataframe(raw_sample, width="stretch", hide_index=True)
 
 
 if __name__ == "__main__":
