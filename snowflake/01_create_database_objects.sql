@@ -1,0 +1,29 @@
+CREATE WAREHOUSE IF NOT EXISTS CLOUDCOST_WH
+  WAREHOUSE_SIZE = 'XSMALL'
+  AUTO_SUSPEND = 60
+  AUTO_RESUME = TRUE;
+
+CREATE DATABASE IF NOT EXISTS CLOUDCOSTLENS;
+
+CREATE SCHEMA IF NOT EXISTS CLOUDCOSTLENS.RAW;
+CREATE SCHEMA IF NOT EXISTS CLOUDCOSTLENS.ANALYTICS;
+
+CREATE TABLE IF NOT EXISTS CLOUDCOSTLENS.RAW.CLOUD_BILLING (
+    billing_date DATE,
+    provider STRING,
+    service STRING,
+    project STRING,
+    team STRING,
+    environment STRING,
+    region STRING,
+    resource_id STRING,
+    usage_quantity FLOAT,
+    usage_unit STRING,
+    unit_cost FLOAT,
+    total_cost FLOAT,
+    currency STRING,
+    tag_owner STRING,
+    tag_cost_center STRING,
+    is_tagged BOOLEAN,
+    loaded_at TIMESTAMP_NTZ DEFAULT CURRENT_TIMESTAMP()
+);
